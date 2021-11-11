@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Heathtracker">
         <activity
+            android:name=".MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".trend"
+            android:exported="true" />
+        <activity
+            android:name=".assessment"
+            android:exported="true" />
+        <activity
+            android:name=".log"
+            android:exported="true" />
+        <activity
             android:name=".Setting"
             android:exported="true" />
 
@@ -18,8 +30,10 @@
             android:resource="@xml/ripple" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".splash"
             android:exported="true">
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

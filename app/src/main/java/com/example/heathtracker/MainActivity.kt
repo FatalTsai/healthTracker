@@ -12,6 +12,7 @@ import android.webkit.WebView
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import kotlin.reflect.typeOf
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,13 +28,7 @@ class MainActivity : AppCompatActivity() {
         val ctLayout : List<ConstraintLayout>  = listOf(findViewById(R.id.firstnav),findViewById(R.id.secondnav),findViewById(R.id.thirdnav),findViewById(R.id.fourthnav))
         val tvList  : List<TextView>  = listOf(findViewById(R.id.firsttv),findViewById(R.id.secondtv),findViewById(R.id.thirdtv),findViewById(R.id.fourthtv))
         val igList  : List<ImageView>  = listOf(findViewById(R.id.firstiv),findViewById(R.id.secondiv),findViewById(R.id.thirdiv),findViewById(R.id.fourthiv))
-
-
-//            for(i in 0..3){
-//
-//                tvList[i]!!.setTextColor(R.color.gray);
-//                igList[i]!!.setColorFilter(R.color.gray)
-//            }
+        val actList  = listOf(Setting::class.java,log::class.java,assessment::class.java,trend::class.java)
 
 
         fun initNav( i: Int){
@@ -47,20 +42,39 @@ class MainActivity : AppCompatActivity() {
         }
 
         initNav(-1)
+
+
+
+
+//        for( i in actList){
+//            Log.i("tag","tag,${i}")
+//
+//            Log.i("tag","${i::class.qualifiedName}")
+//        }
         for(i in 0..3) {
             ctLayout[i].setOnClickListener {
-                Log.i("tag",i.toString()+" is touching")
+//                Log.i("tag",i.toString()+" is touching")
+
+                Log.i("tag","tag,${actList[i]}"+" is touching")
+
+                var it = Intent(this,actList[i])
+                startActivity(it);
+                overridePendingTransition(0,0);
+                finish()
+
+//                Log.i("tag","${log::class.java::class.qualifiedName}")    // "Int"
+
+//                Log.i("tag","${log::class.java}")
+//                Log.i("tag","${21}")
 
                 tvList[i].setTextColor(R.color.white);
                 igList[i].setColorFilter(R.color.white)
 
-
-//                var it = Intent(this,log::class.java)
-//                startActivity(it);
-//                overridePendingTransition(0,0);
-
-
                 initNav(i)
+
+
+
+
 
 
             }

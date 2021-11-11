@@ -8,12 +8,11 @@ import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-
-class Setting : AppCompatActivity() {
+class log : AppCompatActivity() {
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_setting)
+        setContentView(R.layout.activity_log)
 
 
         val ctLayout: List<ConstraintLayout> = listOf(
@@ -49,8 +48,8 @@ class Setting : AppCompatActivity() {
         }
 
         initNav(-1)
-        tvList[0].setTextColor(R.color.white)
-        igList[0].setColorFilter(R.color.white)
+        tvList[1].setTextColor(R.color.white)
+        igList[1].setColorFilter(R.color.white)
 
         for (i in 0..3) {
             ctLayout[i].setOnClickListener {
@@ -75,7 +74,6 @@ class Setting : AppCompatActivity() {
 
 
             }
-
         }
     }
 }
