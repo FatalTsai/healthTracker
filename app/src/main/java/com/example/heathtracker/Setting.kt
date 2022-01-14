@@ -131,8 +131,10 @@ class Setting : AppCompatActivity() {
 
                 var it = Intent(this@Setting, actList[3])
                 startActivity(it);
-                overridePendingTransition(0, 0);
+//                overridePendingTransition(0, 0);
+                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left);
                 finish()
+
 
 //                Log.i("tag","${log::class.java::class.qualifiedName}")    // "Int"
 
@@ -144,10 +146,10 @@ class Setting : AppCompatActivity() {
 
                 initNav(3)
 
-
-                Toast.makeText(this@Setting, "Swipe Left gesture detected",
-                    Toast.LENGTH_SHORT)
-                    .show()
+//
+//                Toast.makeText(this@Setting, "Swipe Left gesture detected",
+//                    Toast.LENGTH_SHORT)
+//                    .show()
             }
             override fun onSwipeRight() {
                 super.onSwipeRight()
@@ -157,7 +159,7 @@ class Setting : AppCompatActivity() {
 
                 var it = Intent(this@Setting, actList[1])
                 startActivity(it);
-                overridePendingTransition(0, 0);
+                overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
                 finish()
 
 //                Log.i("tag","${log::class.java::class.qualifiedName}")    // "Int"
@@ -169,21 +171,23 @@ class Setting : AppCompatActivity() {
                 igList[1].setColorFilter(R.color.white)
 
                 initNav(1)
-                Toast.makeText(
-                    this@Setting,
-                    "Swipe Right gesture detected",
-                    Toast.LENGTH_SHORT
-                ).show()
+
+
+//                Toast.makeText(
+//                    this@Setting,
+//                    "Swipe Right gesture detected",
+//                    Toast.LENGTH_SHORT
+//                ).show()
             }
             override fun onSwipeUp() {
                 super.onSwipeUp()
-                Toast.makeText(this@Setting, "Swipe up gesture detected", Toast.LENGTH_SHORT)
-                    .show()
+//                Toast.makeText(this@Setting, "Swipe up gesture detected", Toast.LENGTH_SHORT)
+//                    .show()
             }
             override fun onSwipeDown() {
                 super.onSwipeDown()
-                Toast.makeText(this@Setting, "Swipe down gesture detected", Toast.LENGTH_SHORT)
-                    .show()
+//                Toast.makeText(this@Setting, "Swipe down gesture detected", Toast.LENGTH_SHORT)
+//                    .show()
             }
         })
     }
