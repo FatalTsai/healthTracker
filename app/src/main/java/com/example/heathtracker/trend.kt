@@ -7,9 +7,13 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.myapplication.OnSwipeTouchListener
 
 class trend : AppCompatActivity() {
+    private lateinit var constr: ConstraintLayout
+
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,6 +80,73 @@ class trend : AppCompatActivity() {
 
             }
         }
+        constr = findViewById(R.id.constr)
+        constr.setOnTouchListener(object : OnSwipeTouchListener(this@trend) {
+            @SuppressLint("ClickableViewAccessibility")
+            override fun onSwipeLeft() {
+                super.onSwipeLeft()
+
+
+                Log.i("tag", "tag,${actList[2]}" + " is touching")
+
+                var it = Intent(this@trend, actList[2])
+                startActivity(it);
+                overridePendingTransition(0, 0);
+                finish()
+
+//                Log.i("tag","${log::class.java::class.qualifiedName}")    // "Int"
+
+//                Log.i("tag","${log::class.java}")
+//                Log.i("tag","${21}")
+
+                tvList[2].setTextColor(R.color.white);
+                igList[2].setColorFilter(R.color.white)
+
+                initNav(2)
+
+
+                Toast.makeText(this@trend, "Swipe Left gesture detected",
+                    Toast.LENGTH_SHORT)
+                    .show()
+            }
+            override fun onSwipeRight() {
+                super.onSwipeRight()
+
+
+                Log.i("tag", "tag,${actList[0]}" + " is touching")
+
+                var it = Intent(this@trend, actList[0])
+                startActivity(it);
+                overridePendingTransition(0, 0);
+                finish()
+
+//                Log.i("tag","${log::class.java::class.qualifiedName}")    // "Int"
+
+//                Log.i("tag","${log::class.java}")
+//                Log.i("tag","${21}")
+
+                tvList[0].setTextColor(R.color.white);
+                igList[0].setColorFilter(R.color.white)
+
+                initNav(0)
+
+                Toast.makeText(
+                    this@trend,
+                    "Swipe Right gesture detected",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+            override fun onSwipeUp() {
+                super.onSwipeUp()
+                Toast.makeText(this@trend, "Swipe up gesture detected", Toast.LENGTH_SHORT)
+                    .show()
+            }
+            override fun onSwipeDown() {
+                super.onSwipeDown()
+                Toast.makeText(this@trend, "Swipe down gesture detected", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        })
 
 
     }
