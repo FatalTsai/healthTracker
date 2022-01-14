@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         val igList  : List<ImageView>  = listOf(findViewById(R.id.firstiv),findViewById(R.id.secondiv),findViewById(R.id.thirdiv),findViewById(R.id.fourthiv))
         val actList  = listOf(Setting::class.java,log::class.java,assessment::class.java,trend::class.java)
 
-
         fun initNav( i: Int){
             for(j in 0..3){
                 if(j != i ) {
@@ -42,7 +41,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         initNav(-1)
-
 
 
 
