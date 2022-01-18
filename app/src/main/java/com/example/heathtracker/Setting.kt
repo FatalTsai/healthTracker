@@ -2,20 +2,47 @@ package com.example.heathtracker
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.MotionEvent
-import android.widget.ImageView
-import android.widget.RelativeLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.MotionEventCompat
 import com.example.myapplication.OnSwipeTouchListener
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class Setting : AppCompatActivity() {
     private lateinit var constr: ConstraintLayout
+    private companion object {
+        private const val TAG = "MainActivity"
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+    private lateinit var auth: FirebaseAuth
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.miLogout) {
+            Log.i(TAG, "Logout")
+            auth.signOut()
+            val logoutIntent = Intent(this, Login::class.java)
+            logoutIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(logoutIntent)}
+//        } else if (item.itemId == R.id.miEdit) {
+//            showAlertDialog()
+//        }
+        return super.onOptionsItemSelected(item)
+    }
 
 
 //    override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -51,9 +78,7 @@ class Setting : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
-
-
-
+        auth = Firebase.auth
 
 
 
@@ -119,6 +144,37 @@ class Setting : AppCompatActivity() {
             }
 
         }
+
+        val etHeight : EditText = findViewById(R.id.etHeight)
+        val etWeight : EditText = findViewById(R.id.etweight)
+        val rbMale : RadioButton =findViewById(R.id.rbMale)
+        val rgroup : RadioGroup =findViewById(R.id.rgroup)
+
+         fun readData() {
+             val mPrefs = getPreferences(MODE_PRIVATE)
+             val info : TextView = findViewById(R.id.info)
+             var msg = ""
+             msg += "height : "+mPrefs.getString("height","")+"\n"
+             msg += "weight : "+mPrefs.getString("weight","")+"\n"
+             msg += "sex : "+mPrefs.getString("sex","")+"\n"
+
+             info.text = msg
+
+         }
+        readData()
+        val button : Button = findViewById(R.id.button)
+//        val sexstr = rbMale.isChecked() ? "M":"F"
+        button.setOnClickListener(View.OnClickListener {
+            val mPrefs = getPreferences(MODE_PRIVATE)
+            mPrefs.edit()
+                .putString("height", etHeight.text.toString())
+                .putString("weight", etWeight.text.toString())
+                .putString("sex", if (rbMale.isChecked() ) "Male" else "Female")
+                .apply()
+            readData()
+        })
+
+
 
         constr = findViewById(R.id.constr)
         constr.setOnTouchListener(object : OnSwipeTouchListener(this@Setting) {
@@ -190,5 +246,16 @@ class Setting : AppCompatActivity() {
 //                    .show()
             }
         })
+
+
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val mPrefs = getPreferences(MODE_PRIVATE)
+        val prefsEditor: SharedPreferences.Editor = mPrefs.edit()
+
+
     }
 }
